@@ -1,0 +1,89 @@
+.backdrop
+    position: fixed
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100%
+    background: rgba(244,244,244, .54)
+    //opacity: .54
+    z-index: 7000
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    opacity: 1
+    pointer-events: auto
+    transition: all .2s
+
+.backLink
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    //background: red
+
+
+.imgContainer
+    position: relative
+    //pointer-events: auto
+    width: auto
+    height: auto
+    opacity: 1
+    transition: all .2s .2s
+
+
+.link
+    height: 100%
+    width: 50%
+    top: 0
+    position: absolute
+    display: block
+    z-index: 8100
+
+.left
+    left: 0
+    //border: 3px solid yellow
+    &:hover
+        //cursor: url("../../assets/instagram.svg"), auto
+        cursor: url("../../assets/back-grey-1.png"), auto
+.right
+    right: 0
+    //border: 3px solid black
+    &:hover
+        //cursor: url("../../assets/svg/next.svg"), auto
+        cursor: url("../../assets/next-grey-1.png"), auto
+.img
+    position: relative
+    z-index: 8000
+    max-width: 95vw
+    max-height: 95vh
+
+.back
+    position: absolute
+    right: 2rem
+    bottom: 2rem
+    z-index: 8100
+    font-size: 2.5rem
+    transition: all .2s
+    &:link, &:visited
+        color: var(--grey-2)
+        text-decoration: none
+    &:hover
+        color: var(--grey-1)
+
+.hidden
+    opacity: 0
+    pointer-events: none
+    .imgContainer
+        //width: 0
+        //height: 0
+        opacity: 0
+
+@media screen and (max-width: 80em)
+    .back
+        bottom: -3rem
+        right: 1rem
+        &:link, &:visited
+            color: var(--grey-1)

@@ -1,0 +1,23 @@
+.container
+    background: var(--grey-1)
+    min-height: 100vh
+    width: 100vw
+    padding: 5rem 10rem
+    padding-top: 13rem
+
+
+.current
+    color: var(--grey-3)
+    border-bottom: 2px solid var(--grey-3)
+
+.children
+    height: calc(100vh - 18rem)
+    width: 100%
+
+@media screen and (max-width: 80em)
+    .container
+        padding: 5%
+        padding-top: 6.5rem
+    .children
+        height: calc(100vh - 11.5rem)
+        width: 100%

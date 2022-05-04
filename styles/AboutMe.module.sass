@@ -1,0 +1,46 @@
+.container
+    width: 100%
+    height: 100%
+.imgContainer
+    height: 100%
+.img
+    height: 75vh //quiero utilizar 100% para que ocupe el resto pero no se como
+    //width: 33vw
+
+.container
+    display: flex
+
+.p
+    //position: absolute
+    text-indent: 1.5em
+    width: 33%
+    margin: auto
+    color: var(--grey-3)
+    font-size: 2.4rem
+
+@media screen and (max-width: 80em)
+    .container
+        display: flex
+        justify-content: center
+        align-items: center
+    .imgContainer
+        position: fixed
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+    .img
+        height: 100%
+        //width: 100%
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+    .p
+        position: relative
+        width: 80%
+        margin: auto
+        //margin-top: 4rem
+        color: var(--grey-1)
+        font-size: 2.5rem
+
