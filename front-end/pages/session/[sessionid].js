@@ -6,7 +6,7 @@ import Popup from "../components/Popup/Popup";
 
 const Session = () => {
   const router = useRouter();
-  console.log("INIT", router, router.query, router.query.sessionid);
+  const { sessionid } = router.query;
   const [content, setContent] = useState(null);
   const [images, setImages] = useState(null);
   const [displayPU, setDisplayPU] = useState(false);
@@ -46,9 +46,7 @@ const Session = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(router, router.query, router.query.id);
-    const { sessionid } = router.query;
+  const getData = () => {
     import("../assets/database/" + sessionid + "/index").then((raw) => {
       console.log("[DATA]", raw.default);
       const data = raw.default;
@@ -69,7 +67,13 @@ const Session = () => {
         </>
       );
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    console.log("[QUERY]", router, router.query, router.query.id);
+
+    if (sessionid) getData();
+  }, [sessionid]);
 
   //console.log('[L]', location)
   return (
