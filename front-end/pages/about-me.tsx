@@ -1,15 +1,22 @@
-import React from "react";
+import type { NextPage } from "next";
 
 import classes from "../styles/AboutMe.module.sass";
 
-import Nerea from "./assets/nerea-about.png";
-import Layout from "./components/Layout/Layout";
+import nerea from "./assets/nerea-about.png";
 
-const aboutMe = (props) => {
+import Image from "next/image";
+
+const AboutMe: NextPage = () => {
+  console.log("[NEREA]", nerea);
   return (
     <div className={classes.container}>
       <div className={classes.imgContainer}>
-        <img className={classes.img} src={Nerea} />
+        <Image
+          className={classes.img}
+          src={nerea}
+          layout="fill"
+          objectFit="contain"
+        />
       </div>
       <p className={classes.p}>
         Soy una fotografa de elche. Formerly known as Nerelx. Tengo un perro,
@@ -20,4 +27,4 @@ const aboutMe = (props) => {
   );
 };
 
-export default aboutMe;
+export default AboutMe;

@@ -52,7 +52,7 @@ const Session = () => {
     import("../assets/database/" + sessionid + "/index").then((raw) => {
       console.log("[DATA]", raw.default);
       const data = raw.default;
-      //console.log(data.images)
+      console.log("[IMAGES]", data.images);
       setImages(data.images);
       setContent(
         <>

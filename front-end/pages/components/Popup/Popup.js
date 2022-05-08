@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./Popup.module.sass";
 
 const popup = (props) => {
-  return (
+  const content = props.image ? (
     <div
       className={
         classes.backdrop + " " + (props.display ? null : classes.hidden)
@@ -31,7 +31,8 @@ const popup = (props) => {
         </a>
       </div>
     </div>
-  );
+  ) : null;
+  return content;
 };
 
 export default popup;

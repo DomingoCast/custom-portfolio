@@ -28,7 +28,7 @@ const navbar = (props) => {
           </Link>
           <Link
             activeStyle={currentStyle}
-            href="/aboutme"
+            href="/about-me"
             className={styles.link}
           >
             About me
@@ -100,7 +100,7 @@ const navbar = (props) => {
             <Link
               //   activeStyle={currentStyle}
               onClick={() => props.handleMenu(null)}
-              href="/aboutme"
+              href="/about-me"
               className={styles.link}
             >
               About me
