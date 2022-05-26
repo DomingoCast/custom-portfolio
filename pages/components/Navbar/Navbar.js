@@ -8,7 +8,7 @@ import leftArrow from "../../assets/svg/left-arrow.png";
 
 const navbar = (props) => {
   let currentStyle;
-  console.log(props);
+  console.log("[SOY GILIPOLLAAAAAAS]", props.user);
   let navContent;
   if (props.mode === "desktop") {
     currentStyle = {
@@ -20,7 +20,7 @@ const navbar = (props) => {
     navContent = (
       <nav className={styles.nav + " " + (props.shrink ? styles.shrink : null)}>
         <Link href="/" className={styles.link}>
-          <h1 className={styles.h1}>Nerea Molina</h1>
+          <h1 className={styles.h1}>{user.name}</h1>
         </Link>
         <div className={styles.links}>
           <Link activeStyle={currentStyle} href="/" className={styles.link}>
@@ -63,8 +63,11 @@ const navbar = (props) => {
         <nav
           className={styles.nav + " " + (props.shrink ? styles.shrink : null)}
         >
-          <Link href="/" className={styles.link}>
-            <h1 className={styles.h1}>Nerea Molina</h1>
+          <Link
+            href={"/" + (props.user ? props.user.id : "")}
+            className={styles.link}
+          >
+            <h1 className={styles.h1}>{props.user ? props.user.name : ""}</h1>
           </Link>
           <a
             href="#"
@@ -120,5 +123,17 @@ const navbar = (props) => {
   }
   return <>{navContent}</>;
 };
+export async function getServerSideProps({ query }) {
+  // Fetch data from external API
+  console.log("[QUERY]", query);
+  const res = await fetch(
+    process.env.API_URL + "/collection/" + query.sessionid
+  );
+  const res2 = await fetch(process.env.API_URL + "/user/" + query.userId);
+  const collection = await res.json();
+  const user = await res2.json();
+
+  return { props: { collection, user } };
+}
 
 export default navbar;

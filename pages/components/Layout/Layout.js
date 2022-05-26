@@ -3,6 +3,8 @@ import React, { useState, useEffect, componentDidMount } from "react";
 import classes from "./Layout.module.sass";
 
 import Navbar from "../Navbar/Navbar";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const Layout = ({ children }) => {
   //console.log(props, window.location.href)
@@ -12,6 +14,8 @@ const Layout = ({ children }) => {
   const [navShrink, setNavShrink] = useState(false);
   const [disMode, setDM] = useState(null);
   const [disMenu, setDisMenu] = useState(false);
+  const [disUser, setDisUser] = useState(null);
+  const query = useRouter().query;
 
   useEffect(() => {
     if (
@@ -32,6 +36,11 @@ const Layout = ({ children }) => {
       } else if (window.scrollY <= 50 && navShrink) {
         setNavShrink(false);
       }
+    });
+    axios.get("http://localhost:8080/user/" + query.userId).then((res) => {
+      const user = res.data.user;
+      console.log(user);
+      setDisUser(user);
     });
   }, []);
 
@@ -55,6 +64,7 @@ const Layout = ({ children }) => {
         shrink={navShrink}
         disMenu={disMenu}
         handleMenu={(e) => handleMenu(e)}
+        user={disUser}
       />
       <div className={classes.children}>{children}</div>
     </div>

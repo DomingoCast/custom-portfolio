@@ -4,17 +4,18 @@ import classes from "../../styles/Session.module.sass";
 import Grid from "../components/Grid/Grid";
 import Popup from "../components/Popup/Popup";
 
-const Session = () => {
-  const router = useRouter();
-  const { sessionid } = router.query;
-  const [content, setContent] = useState(null);
-  const [images, setImages] = useState(null);
+const Session = ({ collection }) => {
+  console.log("[col1]", collection);
+  const response = collection.collection;
+  console.log("[col2]", collection);
   const [displayPU, setDisplayPU] = useState(false);
   const [currImg, setCImg] = useState(null);
+  const images = response.posts;
+  console.log("[IMAGES]", images, currImg);
+  collection = response.collection;
 
   const popItUp = (e, pos) => {
     e.preventDefault();
-    console.log("[PPPP]", pos, images /*, images[pos]*/);
     setCImg(pos);
     //if(images){
     //setCImg(images[pos])
@@ -46,39 +47,20 @@ const Session = () => {
     }
   };
 
-  const getData = () => {
-    import("../assets/database/" + sessionid + "/index").then((raw) => {
-      console.log("[DATA]", raw.default);
-      const data = raw.default;
-      console.log("[IMAGES]", data.images);
-      setImages(data.images);
-      setContent(
-        <>
-          <h2 className={classes.h2}> {data.info.name} </h2>
-          <p className={classes.text}> {data.info.description}</p>
-          <Grid
-            type="images"
-            click={(e, pos) => {
-              console.log("[clock]", e, pos);
-              popItUp(e, pos);
-            }}
-            elements={data.images}
-          />
-        </>
-      );
-    });
-  };
-
-  useEffect(() => {
-    console.log("[QUERY]", router, router.query, router.query.id);
-
-    if (sessionid) getData();
-  }, [sessionid]);
-
-  //console.log('[L]', location)
   return (
     <>
-      {content}
+      <>
+        <h2 className={classes.h2}> {collection.title} </h2>
+        <p className={classes.text}> {collection.description}</p>
+        <Grid
+          type="images"
+          click={(e, pos) => {
+            console.log("[clock]", e, pos);
+            popItUp(e, pos);
+          }}
+          elements={images}
+        />
+      </>
       <Popup
         image={images ? images[currImg] : null}
         display={displayPU}
@@ -89,5 +71,15 @@ const Session = () => {
     </>
   );
 };
+export async function getServerSideProps({ query }) {
+  // Fetch data from external API
+  const res = await fetch(
+    process.env.API_URL + "/collection/" + query.sessionid
+  );
+  let collection = await res.json();
+  colleciton = "";
+
+  return { props: { collection } };
+}
 
 export default Session;

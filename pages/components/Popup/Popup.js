@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./Popup.module.sass";
 
 const popup = (props) => {
+  console.log("[PROPS2]", props);
   const content = props.image ? (
     <div
       className={
@@ -13,8 +14,9 @@ const popup = (props) => {
       <div className={classes.imgContainer}>
         <img
           className={classes.img}
-          src={props.image.default.src}
+          src={"http://localhost:8080/image/" + props.image.thumbnail}
           alt="expanded superpwer"
+          layout="fill"
         />
         <a
           href="#"
